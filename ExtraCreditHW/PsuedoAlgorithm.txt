@@ -1,0 +1,94 @@
+# Psuedo code for page rank with trsutworthy score in consideration
+
+create a list - index value represents node
+
+Main()
+{
+	List =CreateList(inputfile)
+	CreateTransposeMatrix(List)
+
+	PageRank(LeafNodeList, NumOfLinks, incomingLink, alpha, convergence, steps)
+
+}
+
+Function CreateList(inputfile)
+{
+for line in inputfile:
+	read the from and to node from line
+	check if nodes to be added in the list
+
+	if yes:
+		add nodes to list based max value of from or to
+
+	In the 'from' index of the list add the 'to' node.
+
+	//This way a list having outgoing links at the 'from' index are stored.
+}
+
+Function CreateTransposeMatrix(List)
+{
+	
+	NoOfPages= Length of List
+
+	For i=0 to NoOfPages-1 
+	if(no outgoing link at List[i])
+		//Create leafnode list
+		Append to LeafNodeList
+	else
+		NumOfLinks[i]= length of List[i]
+		
+		//Create the transpose matrix of List
+		for j in List[i]:
+			//Create a incoming node list 
+			Append i to incomingLink[j]
+
+	Return LeafNodeList, NumOfLinks, incomingLink
+}
+
+PageRank(LeafNodeList, NumOfLinks, incomingLink, alpha, convergence, steps)
+{
+	
+	Calculate no of pages 'N' from incomingLink
+	M = No of Leaf nodes from LeafNodeList
+
+	//Initialise with page rank as 1/N
+	Initialise two arrays iNew and iOld with length N and values 1/N in all indexes
+
+	***//IF TRUSTWORTHY SCORE OF PAGE IS KNOWN, MULTIPLY iNew AND iOld WITH ITS INDIVIDUAL PAGERANK.
+	// Hence, the effective pagerank will be trustworthy score/N
+
+	While not done
+	{
+
+		for step in steps
+		{
+			Calculate IdentityVector = 1-alpha * (sum of page rank from iOld /N)
+		}
+
+		//Create a A*I vector 
+		If leaf nodes
+		{
+			AIvector = alpha * (sum of page rank from iOld /N)
+		}
+
+		//Calculate the revised page rank
+
+		while N 
+		{
+			Pagerank in iNew = alpha * (sum (PageRank from iOld /Number of outbound links))
+
+			RevisedPageRank in iNew = Pagerank in iNew + IdentityVector + AIvector
+		}
+
+		If(PageRank iNew - PageRank iOld) < convergence
+			stop
+	}
+
+	iNew has pageRanks of all nodes
+
+}
+
+
+
+
+
